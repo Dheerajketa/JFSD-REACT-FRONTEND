@@ -26,7 +26,7 @@ function Profile() {
     if (user && user.username) {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/users/role/request?username=${user.username}`,
+          `https://userservice.up.railway.app/api/users/role/request?username=${user.username}`,
           { method: "POST" }
         );
         if (response.ok) {
@@ -48,7 +48,7 @@ function Profile() {
     }
     try {
       const response = await fetch(
-        `http://localhost:8080/api/users/profile?username=${editFormData.username}`,
+        `https://userservice.up.railway.app/api/users/profile?username=${editFormData.username}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

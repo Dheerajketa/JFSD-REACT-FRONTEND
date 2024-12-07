@@ -7,7 +7,7 @@ function UserList() {
   useEffect(() => {
     // Fetch the list of instructors
     axios
-      .get("http://localhost:8080/api/users/regular-users")
+      .get("https://userservice.up.railway.app/api/users/regular-users")
       .then((response) => {
         setInstructors(response.data);
       })

@@ -19,7 +19,7 @@ function Webinars() {
     setUsername(parsedUser.username);
 
     // Fetch all webinars
-    fetch("http://localhost:8081/webinars")
+    fetch("https://webinarservice.up.railway.app/webinars")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
@@ -30,7 +30,9 @@ function Webinars() {
       .catch((error) => console.error("Error fetching webinars:", error));
 
     // Fetch registered webinars for the user
-    fetch(`http://localhost:8082/api/registrations/user/${parsedUser.username}`)
+    fetch(
+      `https://localhost:8082/api/registrations/user/${parsedUser.username}`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
@@ -45,7 +47,7 @@ function Webinars() {
 
   const handleRegister = (webinarId) => {
     fetch(
-      `http://localhost:8082/api/registrations?username=${username}&webinarId=${webinarId}`,
+      `https://localhost:8082/api/registrations?username=${username}&webinarId=${webinarId}`,
       {
         method: "POST",
       }
@@ -71,7 +73,7 @@ function Webinars() {
 
   const handleCancelRegistration = (webinarId) => {
     fetch(
-      `http://localhost:8082/api/registrations/cancel?username=${username}&webinarId=${webinarId}`,
+      `https://localhost:8082/api/registrations/cancel?username=${username}&webinarId=${webinarId}`,
       {
         method: "POST",
       }

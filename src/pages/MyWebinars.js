@@ -33,7 +33,9 @@ function MyWebinars() {
     }));
 
     // Fetch webinars scheduled by the instructor
-    fetch(`http://localhost:8081/webinars/instructor/${parsedUser.username}`)
+    fetch(
+      `https://webinarservice.up.railway.app/webinars/instructor/${parsedUser.username}`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
@@ -45,7 +47,7 @@ function MyWebinars() {
   }, [navigate]);
 
   const handleStartWebinar = (webinarId) => {
-    fetch(`http://localhost:8081/webinars/start/${webinarId}`, {
+    fetch(`https://webinarservice.up.railway.app/webinars/start/${webinarId}`, {
       method: "PUT",
     })
       .then((response) => {
@@ -67,7 +69,7 @@ function MyWebinars() {
   };
 
   const handleEndWebinar = (webinarId) => {
-    fetch(`http://localhost:8081/webinars/end/${webinarId}`, {
+    fetch(`https://webinarservice.up.railway.app/webinars/end/${webinarId}`, {
       method: "PUT",
     })
       .then((response) => {
@@ -94,7 +96,7 @@ function MyWebinars() {
 
   const handleCreateWebinar = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8081/webinars", {
+    fetch("https://webinarservice.up.railway.app/webinars", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

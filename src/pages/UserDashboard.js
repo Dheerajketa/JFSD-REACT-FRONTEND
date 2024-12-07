@@ -11,6 +11,7 @@ function UserDashboard() {
     <div>
       <UserNavbar />
       <Routes>
+        <Route path="/" element={<Webinars />} />
         <Route path="webinars" element={<Webinars />} />
         <Route path="registered-webinars" element={<RegisteredWebinars />} />
         <Route path="completed-webinars" element={<CompletedWebinars />} />

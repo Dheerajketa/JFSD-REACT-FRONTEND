@@ -7,7 +7,7 @@ function Login({ setIsLoggedIn }) {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const url = new URL("http://localhost:8080/api/users/login");
+    const url = new URL("https://userservice.up.railway.app/api/users/login");
     url.searchParams.append("username", username);
     url.searchParams.append("password", password);
 

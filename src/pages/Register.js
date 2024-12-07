@@ -105,7 +105,7 @@ function Register() {
 
   const handleGenerateOtp = () => {
     fetch(
-      `http://localhost:8080/api/users/generate-otp?email=${encodeURIComponent(
+      `https://userservice.up.railway.app/api/users/generate-otp?email=${encodeURIComponent(
         email
       )}`,
       {
@@ -130,7 +130,7 @@ function Register() {
 
   const handleVerifyOtp = () => {
     fetch(
-      `http://localhost:8080/api/users/verify-otp?email=${encodeURIComponent(
+      `https://userservice.up.railway.app/api/users/verify-otp?email=${encodeURIComponent(
         email
       )}&otp=${encodeURIComponent(otp)}`,
       {
@@ -155,7 +155,9 @@ function Register() {
 
   const handleRegister = () => {
     fetch(
-      `http://localhost:8080/api/users/register?otp=${encodeURIComponent(otp)}`,
+      `https://userservice.up.railway.app/api/users/register?otp=${encodeURIComponent(
+        otp
+      )}`,
       {
         method: "POST",
         headers: {
