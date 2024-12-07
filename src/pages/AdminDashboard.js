@@ -14,13 +14,13 @@ function AdminDashboard() {
     <div>
       <AdminNavbar />
       <Routes>
+        <Route path="/" element={<Statistics />} />
         <Route path="webinars" element={<AdminWebinars />} />
         <Route path="instructor-list" element={<InstructorList />} />
         <Route path="user-list" element={<UserList />} />
-        <Route path="approve-Instructor" element={<ApproveInstructor />} />
+        <Route path="approve-instructor" element={<ApproveInstructor />} />
         <Route path="profile" element={<Profile />} />
       </Routes>
-      <Statistics />
     </div>
   );
 }
