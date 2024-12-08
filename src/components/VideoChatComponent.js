@@ -16,7 +16,7 @@ const VideoChatComponent = () => {
   useEffect(() => {
     // Fetch the video URL for the webinar
     fetch(
-      `https://webinarservice.up.railway.app/webinars/${webinarId}/videoUrl`
+      `https://jfsd-backend-production.up.railway.app/webinars/${webinarId}/videoUrl`
     )
       .then((response) => {
         if (!response.ok) {
@@ -32,7 +32,9 @@ const VideoChatComponent = () => {
       });
 
     // Fetch the webinar details to get the title
-    fetch(`https://webinarservice.up.railway.app/webinars/${webinarId}`)
+    fetch(
+      `https://jfsd-backend-production.up.railway.app/webinars/${webinarId}`
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);

@@ -7,7 +7,9 @@ function ApproveInstructor() {
   useEffect(() => {
     // Fetch the list of users who have requested to become instructors
     axios
-      .get("https://userservice.up.railway.app/api/users/instructor-requests")
+      .get(
+        "https://jfsd-backend-production.up.railway.app/api/users/instructor-requests"
+      )
       .then((response) => {
         setRequests(response.data);
       })
@@ -18,8 +20,8 @@ function ApproveInstructor() {
 
   const handleApprove = (username) => {
     axios
-      .post(
-        `https://userservice.up.railway.app/api/users/role/change?username=${username}&newRole=Instructor`
+      .put(
+        `https://jfsd-backend-production.up.railway.app/api/users/role/change?username=${username}&newRole=Instructor`
       )
       .then(() => {
         // Remove the approved user from the list

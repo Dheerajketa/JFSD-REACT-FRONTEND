@@ -34,7 +34,7 @@ function MyWebinars() {
 
     // Fetch webinars scheduled by the instructor
     fetch(
-      `https://webinarservice.up.railway.app/webinars/instructor/${parsedUser.username}`
+      `https://jfsd-backend-production.up.railway.app/webinars/instructor/${parsedUser.username}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -47,9 +47,12 @@ function MyWebinars() {
   }, [navigate]);
 
   const handleStartWebinar = (webinarId) => {
-    fetch(`https://webinarservice.up.railway.app/webinars/start/${webinarId}`, {
-      method: "PUT",
-    })
+    fetch(
+      `https://jfsd-backend-production.up.railway.app/webinars/start/${webinarId}`,
+      {
+        method: "PUT",
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
@@ -69,9 +72,12 @@ function MyWebinars() {
   };
 
   const handleEndWebinar = (webinarId) => {
-    fetch(`https://webinarservice.up.railway.app/webinars/end/${webinarId}`, {
-      method: "PUT",
-    })
+    fetch(
+      `https://jfsd-backend-production.up.railway.app/webinars/end/${webinarId}`,
+      {
+        method: "PUT",
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
@@ -96,7 +102,7 @@ function MyWebinars() {
 
   const handleCreateWebinar = (e) => {
     e.preventDefault();
-    fetch("https://webinarservice.up.railway.app/webinars", {
+    fetch("https://jfsd-backend-production.up.railway.app/webinars", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

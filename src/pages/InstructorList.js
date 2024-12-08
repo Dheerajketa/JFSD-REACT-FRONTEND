@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 function InstructorList() {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
     // Fetch the list of instructors
     axios
-      .get("https://userservice.up.railway.app/api/users/instructors")
+      .get(
+        `https://jfsd-backend-production.up.railway.app/api/users/instructors`
+      )
       .then((response) => {
         setInstructors(response.data);
       })
@@ -15,6 +19,23 @@ function InstructorList() {
         console.error("Error fetching instructors:", error);
       });
   }, []);
+
+  const handleRevokeInstructor = (username) => {
+    axios
+      .put(
+        `https://jfsd-backend-production.up.railway.app/api/users/role/change?username=${username}&newRole=USER`
+      )
+      .then(() => {
+        setInstructors((prevInstructors) =>
+          prevInstructors.filter(
+            (instructor) => instructor.username !== username
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("Error revoking instructor role:", error);
+      });
+  };
 
   const containerStyle = {
     padding: "40px 20px",
@@ -40,31 +61,54 @@ function InstructorList() {
   };
 
   const listItemStyle = {
+    display: "flex",
+    flexDirection: "column",
     padding: "10px 0",
     borderBottom: "1px solid #ccc",
   };
 
-  const titleStyle = {
-    fontSize: "1.5rem",
-    fontWeight: "bold",
-    color: "#2c3e50",
+  const userInfoStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   };
 
-  const detailStyle = {
+  const buttonStyle = {
+    padding: "10px 20px",
+    borderRadius: "5px",
+    border: "none",
+    backgroundColor: "#e74c3c",
+    color: "#fff",
     fontSize: "1rem",
-    color: "#666",
+    cursor: "pointer",
+    transition: "background-color 0.3s ease",
+    marginTop: "10px",
+    alignSelf: "flex-end",
   };
 
   return (
     <div style={containerStyle}>
-      <h1 style={headerStyle}>Instructors</h1>
+      <h1 style={headerStyle}>Instructor List</h1>
       <div style={listStyle}>
         {instructors.map((instructor) => (
           <div key={instructor.username} style={listItemStyle}>
-            <p style={titleStyle}>{instructor.username}</p>
-            <p style={detailStyle}>Email: {instructor.email}</p>
-            <p style={detailStyle}>Full Name: {instructor.fullName}</p>
-            <p style={detailStyle}>Role: {instructor.role}</p>
+            <div style={userInfoStyle}>
+              <span>
+                <strong>Username:</strong> {instructor.username}
+              </span>
+              <span>
+                <strong>Email:</strong> {instructor.email}
+              </span>
+              <span>
+                <strong>Role:</strong> {instructor.role}
+              </span>
+            </div>
+            <button
+              style={buttonStyle}
+              onClick={() => handleRevokeInstructor(instructor.username)}
+            >
+              Revoke Instructor
+            </button>
           </div>
         ))}
       </div>

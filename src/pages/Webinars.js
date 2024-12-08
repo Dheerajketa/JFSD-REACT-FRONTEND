@@ -19,7 +19,7 @@ function Webinars() {
     setUsername(parsedUser.username);
 
     // Fetch all webinars
-    fetch("https://webinarservice.up.railway.app/webinars")
+    fetch("https://jfsd-backend-production.up.railway.app/webinars")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
@@ -31,7 +31,7 @@ function Webinars() {
 
     // Fetch registered webinars for the user
     fetch(
-      `https://localhost:8082/api/registrations/user/${parsedUser.username}`
+      `https://jfsd-backend-production.up.railway.app/api/registrations/user/${parsedUser.username}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -47,7 +47,7 @@ function Webinars() {
 
   const handleRegister = (webinarId) => {
     fetch(
-      `https://localhost:8082/api/registrations?username=${username}&webinarId=${webinarId}`,
+      `https://jfsd-backend-production.up.railway.app/api/registrations?username=${username}&webinarId=${webinarId}`,
       {
         method: "POST",
       }
@@ -73,7 +73,7 @@ function Webinars() {
 
   const handleCancelRegistration = (webinarId) => {
     fetch(
-      `https://localhost:8082/api/registrations/cancel?username=${username}&webinarId=${webinarId}`,
+      `https://jfsd-backend-production.up.railway.apphttps://jfsd-backend-production.up.railway.app/api/registrations/cancel?username=${username}&webinarId=${webinarId}`,
       {
         method: "POST",
       }

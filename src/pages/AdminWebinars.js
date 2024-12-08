@@ -19,7 +19,7 @@ function AdminWebinars() {
     setUsername(parsedUser.username);
 
     // Fetch all webinars
-    fetch("https://webinarservice.up.railway.app/webinars")
+    fetch("https://jfsd-backend-production.up.railway.app/webinars")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
@@ -31,7 +31,7 @@ function AdminWebinars() {
 
     // Fetch registered webinars for the user
     fetch(
-      `https://registrationservice.up.railway.app//api/registrations?username=${parsedUser.username}`
+      `https://jfsd-backend-production.up.railway.app/api/registrations?username=${parsedUser.username}`
     )
       .then((response) => {
         if (!response.ok) {

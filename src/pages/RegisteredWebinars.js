@@ -19,7 +19,7 @@ function RegisteredWebinars() {
     // Fetch registered webinars for the user
     axios
       .get(
-        `https://registrationservice.up.railway.app//api/registrations/user/${parsedUser.username}`
+        `https://jfsd-backend-production.up.railway.app/api/registrations/user/${parsedUser.username}`
       )
       .then((response) => {
         const registrations = response.data;
@@ -29,7 +29,7 @@ function RegisteredWebinars() {
         Promise.all(
           webinarIds.map((webinarId) =>
             axios.get(
-              `https://webinarservice.up.railway.app/webinars/${webinarId}`
+              `https://jfsd-backend-production.up.railway.app/webinars/${webinarId}`
             )
           )
         )
