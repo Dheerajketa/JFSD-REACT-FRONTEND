@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 function Login({ setIsLoggedIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -13,29 +14,36 @@ function Login({ setIsLoggedIn }) {
     url.searchParams.append("username", username);
     url.searchParams.append("password", password);
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (!response.ok) {
-      throw new Error("Network response was not ok " + response.statusText);
-    }
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.message || "Wrong username or password");
+        return;
+      }
 
-    const data = await response.json();
-    console.log("User logged in:", data);
+      const data = await response.json();
+      console.log("User logged in:", data);
 
-    localStorage.setItem("user", JSON.stringify(data));
-    setIsLoggedIn(true);
+      localStorage.setItem("user", JSON.stringify(data));
+      setIsLoggedIn(true);
 
-    if (data.role === "USER" || data.role === "INSTRUCTOR_REQUESTED") {
-      navigate("/user-dashboard");
-    } else if (data.role === "Instructor" || data.role === "Instructor") {
-      navigate("/instructor-dashboard");
-    } else if (data.role === "ADMIN") {
-      navigate("/admin-dashboard");
+      if (data.role === "USER" || data.role === "INSTRUCTOR_REQUESTED") {
+        navigate("/user-dashboard");
+      } else if (data.role === "Instructor" || data.role === "Instructor") {
+        navigate("/instructor-dashboard");
+      } else if (data.role === "ADMIN") {
+        navigate("/admin-dashboard");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setError("Incorrect username or password");
     }
   };
 
@@ -47,6 +55,7 @@ function Login({ setIsLoggedIn }) {
       <h3 style={styles.heading}>Let's pick up where you left off!</h3>
       <div style={styles.formBox}>
         <h3 style={styles.formHeading}>Sign In</h3>
+        {error && <div style={styles.error}>{error}</div>}
         <div style={styles.inputGroup}>
           <label htmlFor="username" style={styles.label}>
             Username
@@ -233,6 +242,11 @@ const styles = {
     width: "30px",
     height: "auto",
     borderRadius: "50%",
+  },
+  error: {
+    color: "red",
+    marginBottom: "20px",
+    textAlign: "center",
   },
 };
 
